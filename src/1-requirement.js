@@ -9,17 +9,21 @@ const NAME_ID = 'nameInput'
 
 const handleInput = (event) => {
   // ..
+  event.preventDefault()
   nameDisplay.textContent = event.target.value
 }
 
 const handleClick = () => {
   // ..
-  const name = nameDisplay.textContent.trim();
+  const name = nameDisplay.textContent.trim()
   if (name) alert(`Hello, ${name}!`)
       else alert(`Please insert a name`)
 }
 
-const handleMouseEvent = event => event.target.classList.toggle('hovered');
+const handleMouseEvent = event => {
+  event.preventDefault()
+  event.target.classList.toggle('hovered');
+}
 
 const addEventListeners = () => {
   // Add event listeners here

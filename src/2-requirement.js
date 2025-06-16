@@ -27,17 +27,29 @@ const cart = [
 
 export function main () {
   // Return a function that takes an item and returns a new item with a discounted price
-  function createDiscount (percentage) {}
+  function createDiscount (percentage) {
+    return function(item) {
+      return {
+        ...item, 
+        price: item.price * (1 - percentage / 100)
+      }
+    }
+  }  
 
   // Set the value of discountFunction to the result of calling createDiscount with discountPercentage
-  const discountFunction = {}
+  const discountFunction = createDiscount(discountPercentage)
 
   // Set the value of discountedCart to the result of calling applyDiscount with cart and discountFunction
-  const discountedCart = []
+  const discountedCart = (() => applyDiscount(cart, discountFunction))()
 
   // Trigger the callback and pass in the cart
-  function displayCart (cart, callback) {}
+  function displayCart (cart, callback) {
+    callback(cart)
+  }
 
   // Call displayCart with discountedCart and a callback that updates the DOM
-  displayCart()
+  displayCart(discountedCart, cart => {
+    const cartContainer = document.querySelector('#cart')
+    updateDom(cart, cartContainer)
+  })
 }
