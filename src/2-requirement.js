@@ -42,14 +42,16 @@ export function main () {
   // Set the value of discountedCart to the result of calling applyDiscount with cart and discountFunction
   const discountedCart = (() => applyDiscount(cart, discountFunction))()
 
+  const cb_updateDOM = cart => {
+    const cartContainer = document.querySelector('#cart')
+    updateDom(cart, cartContainer)
+  }
   // Trigger the callback and pass in the cart
   function displayCart (cart, callback) {
     callback(cart)
   }
 
+
   // Call displayCart with discountedCart and a callback that updates the DOM
-  displayCart(discountedCart, cart => {
-    const cartContainer = document.querySelector('#cart')
-    updateDom(cart, cartContainer)
-  })
+  displayCart(discountedCart, cb_updateDOM)
 }
